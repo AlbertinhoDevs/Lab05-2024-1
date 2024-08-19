@@ -1,17 +1,18 @@
-package main.sorter;
+package sorter;
 
 public class MergeSort implements Sorter {
 
-
     @Override
     public int[] sort(int[] values) {
-        if(values.length <= 1){
+        if (values.length <= 1) {
             return values;
         }
-
-        int mid = values.length/2;
+        int mid = values.length / 2;
         int[] left = new int[mid];
         int[] right = new int[values.length - mid];
+
+        System.arraycopy(values, 0, left, 0, mid);
+        System.arraycopy(values, mid, right, 0, values.length - mid);
 
         left = sort(left);
         right = sort(right);
@@ -20,22 +21,25 @@ public class MergeSort implements Sorter {
     }
 
     public int[] merge(int[] left, int[] right) {
-        int i = 0, j = 0;
-        int tamanhoEsquerdo = left.length;
-        int tamanhoDireito = right.length;
-        int k = tamanhoEsquerdo + tamanhoDireito;
-        int[] arrayNovo = new int[k];
+        int[] result = new int[left.length + right.length];
+        int i = 0, j = 0, k = 0;
 
-        while(i < tamanhoEsquerdo && j < tamanhoDireito){
-            if(right[i] <= left[j]){
-                arrayNovo[k] = right[i];
-                i++;
-            }else{
-                arrayNovo[k] = left[j];
-                j++;
+        while (i < left.length && j < right.length) {
+            if (left[i] <= right[j]) {
+                result[k++] = left[i++];
+            } else {
+                result[k++] = right[j++];
             }
-            k++;
         }
-        return arrayNovo;
+
+        while (i < left.length) {
+            result[k++] = left[i++];
+        }
+
+        while (j < right.length) {
+            result[k++] = right[j++];
+        }
+
+        return result;
     }
 }

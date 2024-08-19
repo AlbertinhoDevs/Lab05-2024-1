@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import list.Sorter;
-import main.sorter.MergeSort;
-import main.sorter.QuickSorter;
+import sorter.Sorter;
+import sorter.MergeSort;
+import sorter.QuickSorter;
 
 public class AppTest {
 
